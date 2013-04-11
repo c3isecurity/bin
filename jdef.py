@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 print "\n Junos OVAL Content Creator."
 print "Copyright (c) 2012, C3isecurity."
 print "All rights reserved."

@@ -1,3 +1,5 @@
+#!/usr/bin/tclsh
+
 #lnunez@c3isecurity.com
 
 # This script is intentded to verfity that the IOS device is in compliance with
