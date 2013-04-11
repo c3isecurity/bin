@@ -30,7 +30,7 @@
 
 puts "Cisco IOS STIG SCAN"
 puts "Version 0.4"
-puts "Copyright (c) 1986-2011 by C3isecurity, Inc.\n"
+puts "Copyright (c) 1986-2013 by C3isecurity, Inc.\n"
 
 set input [lindex $argv 0]
 set input2 [lindex $argv 1]
