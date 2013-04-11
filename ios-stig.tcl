@@ -94,7 +94,7 @@ switch $input {
         puts "   - NET0900 SNMP traffic loopback address Check"
         puts "   - NET0430 Two authentication servers"
         puts "   - NET1021 logging host"
-        puts "   - NET1070 SCP "
+        puts "   - NET1070 TFTP used without written approval (use SCP)"
         puts "   - NET-IPV6-025 IPv6 Site Local Unicast Address must not be defined"
         puts "   - NET-IPV6-034 IPv6 Egress Outbound Spoofing Filter"
         puts "   - NET-0950 uRPF strict mode not enabled on egress interface"
