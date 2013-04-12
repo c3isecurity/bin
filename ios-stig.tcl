@@ -1334,7 +1334,7 @@ set total_fail 0
    incr total_test
 ######################################
   puts "Checking NET1070 SCP"
-#------- Intnet of the STIG item is to use SCP instead of tftp.
+#------- Intent of the STIG item is to use SCP instead of tftp.
 # NET1070 The IAO/NSO will authorize and maintain justification
 # for all TFTP implementations.   
 #------- Reference Network Policy STIG for further details
