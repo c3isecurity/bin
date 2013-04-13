@@ -2,13 +2,13 @@
 
 #lnunez@c3isecurity.com
 
-# This script is intentded to verfity that the IOS device is in compliance with
+# This script is intended to verfity that the IOS device is in compliance with
 # the DISA Network Infrastructure STIG check-list.
 
-# Usage: tclsh {offline | online | list} config file
-# Usage: tclsh ios-stig.tcl {offline | online | list | help} config file
+# Usage: tclsh {offline | onboard | list} config file
+# Usage: tclsh ios-stig.tcl {offline | onboard | list | help} config file
 # -- offline               used to scan config file on a unix system with TCL
-# -- online (default)      used to scan from a Cisco IOS device with a tcl parser
+# -- onboard (default)      used to scan from a Cisco IOS device with a tcl parser
 # -- list                  display all the STIG checks
 # -- help                  list this output
 
@@ -18,10 +18,10 @@
 #      linux$ tclsh list
 #      linux$ help
 
-#This script is used to read a config off-line from a Unix system with Tcl.
-#Features:
+# This script is used to read a config off-line from a Unix system with Tcl.
+# Features:
 #   - Reads IOS config files offline
-#   - Script can run onboard a IOS system online
+#   - Script can run onboard a IOS device onboard
 #   - Outputs standard out and to a file stig_results
 #   - Checks config based on STIG Network Infrastructure Checklist Version 8.
 
@@ -50,8 +50,8 @@ switch $input {
         }
         close $config
     }
-    "online" {
-        puts "online STIG SCANNING"
+    "onboard" {
+        puts "onboard STIG SCANNING"
         puts [hostname]
         set results [open "stig.results" w]
         set int_out [exec "show running"]
@@ -105,7 +105,7 @@ switch $input {
         exit    
     }
     "help" {
-        puts "Usage: tclsh ios-stig.tcl {offline | online | list | help} config file"
+        puts "Usage: tclsh ios-stig.tcl {offline | onboard | list | help} config file"
         puts " -- offline               used to scan config file on a unix system with TCL"
         puts " -- online (default)      used to scan from a Cisco IOS device with a tcl parser"
         puts " -- list                  display all the STIG checks"
