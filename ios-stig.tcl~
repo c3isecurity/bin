@@ -3,8 +3,7 @@
 #lnunez@c3isecurity.com
 
 # This script is intended to verfity that the IOS device is in compliance with
-# the DISA Network Infrastructure STIG check-list. Use this script only if you have no
-# choice.  This is banananoodles. 
+# the DISA Network Infrastructure STIG check-list.
 
 # Usage: tclsh {offline | onboard | list} config file
 # Usage: tclsh ios-stig.tcl {offline | onboard | list | help} config file

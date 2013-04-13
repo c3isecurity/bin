@@ -1,0 +1,130 @@
+FAIL NET1645 SSH timeout 60 seconds Check
+Severity: CAT II
+FIX: ip ssh time-out 60
++---------------------+
+FAIL NET1646 SSH login attempts greater than 3 Check
+Severity: CAT II
+FIX: ip ssh authentication-retries 3
++---------------------+
+FAIL NET1647 SSH version 2 Check
+Severity: CAT II
+FIX: ip ssh version 2
++---------------------+
+PASS NET0724 TCP Keep-Alives Check
++---------------------+
+PASS NET0722 service PAD Check
++---------------------+
+PASS NET0340 Login Banner Check
++---------------------+
+PASS NET0965 TCP Synwait Check
++---------------------+
+FAIL NET0812 NTP server/peer Check
+Severity: CAT III
++---------------------+
+FAIL NET0813 NTP authenticate Check
+Severity: CAT III
++---------------------+
+FAIL NET0813 NTP Authentication-key Check
+Severity: CAT III
++---------------------+
+FAIL NET0813 NTP Trusted-key Check
+Severity: CAT III
++---------------------+
+FAIL NET0899 NTP Loopback Check
+Severity: CAT III
++---------------------+
+PASS NET0730 finger Check
++---------------------+
+PASS NET0600 service password-encryption check
++---------------------+
+PASS NET0720 TCP small server services check
++---------------------+
+PASS NET0720 UDP small server services check
++---------------------+
+PASS NET0726 Ident check
++---------------------+
+PASS NET0770 IP Source Routing Check
++---------------------+
+PASS NET0781 Gratuitous ARP Check
++---------------------+
+PASS NET0949 IP CEF Check
++---------------------+
+FAIL NET-IPV6-033 IPv6 CEF Check
+Severity: CAT II
+FIX: ipv6 cef
++---------------------+
+PASS NET0750 bootp server Check
++---------------------+
+PASS NET0750 boot network must be disabled Check
++---------------------+
+PASS NET0750 service config must be disabled Check
++---------------------+
+PASS NET0820 ip domain-lookup Check
++---------------------+
+FAIL NET0902 FTP use loopback Check
+Severity: CAT III
+FIX: ip ftp source-interface Loopback0
++---------------------+
+FAIL NET0902 TFTP use loopback Check
+Severity: CAT III
+FIX: ip tftp source-interface Loopback0
++---------------------+
+FAIL NET0899 NTP use loopback Check
+Severity: CAT III
+FIX: ntp source Loopback0
++---------------------+
+FAIL NET0740 HTTP server disabled Check
+Severity: CAT II
+FIX: no ip http server
++---------------------+
+PASS NET0740 HTTPS server disabled Check
++---------------------+
+FAIL NET0897 authentication (TACACS+) traffic use loopback Check
+Severity: CAT III
+FIX: ip tacacs source-interface Loopback
++---------------------+
+FAIL NET0897 authentication (RADIUS) traffic use loopback Check
+Severity: CAT III
+FIX: ip radius source-interface Loopback
++---------------------+
+PASS NET0898 Syslog traffic loopback Check
++---------------------+
+PASS NET0900 SNMP traffic loopback address Check
++---------------------+
+FAIL NET0430 Two authentication servers Check
+Severity: CAT II
+FIX: tacacs-server host
++---------------------+
+FAIL NET1021 logging host Check
+Severity: CAT III
+FIX: logging host
++---------------------+
+FAIL NET1070 SCP Check
+Severity: CAT III
+FIX: ip scp server enable
++---------------------+
+PASSNET-IPV6-025 IPv6 Site Local Unicast Address Check
++------------------------+
+FAIL NET-0950 uRPF strict mode not enabled on egress interface Check
+Severity: CAT I
+FIX: ipv6 verfiy unicast source reachable-via rx
++------------------------+
+FAIL NET-IPV6-034 IPv6 Egress Outbound Spoofing Filter Check
+Severity: CAT II
+FIX: ipv6 verfiy unicast source reachable-via rx
++------------------------+
+FAIL Checking NET-0400 OSPF authentication Check
+Severity: CAT II
+FIX: area 0 authentication message-digest
++------------------------+
+FAIL Checking Checking NET Check
+Severity: CAT II
+FIX: ip ospf message-digest 10 md5 mypassword
++------------------------+
+Configuration Hygiene Check
+Sat Apr 13 10:34:58 EDT 2013
+Total Checked: 42
+Total PASS: 20
+Total FAIL: 22
+
+
