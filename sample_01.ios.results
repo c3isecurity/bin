@@ -1,3 +1,7 @@
+Cisco IOS STIG SCAN
+Version 0.5
+Copyright (c) 1986-2013 by C3isecurity, Inc.
+
 FAIL NET1645 SSH timeout 60 seconds Check
 Severity: CAT II
 FIX: ip ssh time-out 60
@@ -122,7 +126,7 @@ Severity: CAT II
 FIX: ip ospf message-digest 10 md5 mypassword
 +------------------------+
 Configuration Hygiene Check
-Sat Apr 20 15:51:31 EDT 2013
+Sat Apr 20 16:16:33 EDT 2013
 Total Checked: 42
 Total PASS: 20
 Total FAIL: 22

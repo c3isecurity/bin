@@ -1,7 +1,7 @@
 #!/usr/bin/tclsh
 
 #lnunez@c3isecurity.com
-
+set script_version "0.5"
 # This script is intended to verfity that the IOS device is in compliance with
 # the DISA Network Infrastructure STIG check-list. Use this script only if you have no
 # choice.  This is banananoodles. 
@@ -76,7 +76,6 @@ proc start_check {} {
 ######################################
     puts "Checking NET1646 SSH login attempts greater than 3 Check"
     set check ""
-#    set int_out [exec "show running linenum full"]
    foreach int [regexp -all -line {^\s*(ip ssh authentication-retries 3)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ssh_out]} {
@@ -85,7 +84,6 @@ proc start_check {} {
                 set ssh_out $int
             }
             set check $int
-  #         puts $int
         }
     }
     if {$int >= 1} {
@@ -100,7 +98,6 @@ proc start_check {} {
         puts $results "FIX: ip ssh authentication-retries 3"
         incr total_fail        
     }
-  # puts $ntp_out
    puts "Finished NET1646 SSH login attempts greater than 3 Check"
    puts "+---------------------+"
    puts $results "+---------------------+"
@@ -403,8 +400,6 @@ proc start_check {} {
 #######################################
     puts "Checking NET0899 NTP loopback address"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
    foreach int [regexp -all -line {^\s*(ntp source Loopback.*){1,}} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ntp_out]} {
@@ -413,7 +408,6 @@ proc start_check {} {
                 set ntp_out $int
             }
             set check $int
-  #         puts $int
         }
     }
     if {[string equal 1 $int]} {
@@ -427,7 +421,6 @@ proc start_check {} {
         puts $results "Severity: CAT III"
         incr total_fail
     }
-  # puts $ntp_out
    puts "Finished NET0899 NTP Loopback Check"
    puts "+----------------------+"
    puts $results "+---------------------+"
@@ -1441,7 +1434,7 @@ proc start_check {} {
 
 
 puts "Cisco IOS STIG SCAN"
-puts "Version 0.5"
+puts "Version $script_version"
 puts "Copyright (c) 1986-2013 by C3isecurity, Inc.\n"
 
 set input [lindex $argv 0]
@@ -1458,6 +1451,9 @@ switch $input {
         set config [open "$input2" r]
         puts "Opening Config file $input2"
         set results [open "$input2.results" w]
+		puts $results "Cisco IOS STIG SCAN"
+		puts $results "Version $script_version"
+		puts $results "Copyright (c) 1986-2013 by C3isecurity, Inc.\n"
          
         while { [gets $config line] >= 0 } {
 			global int_out
@@ -1522,6 +1518,8 @@ switch $input {
         exit    
     }
     "help" {
+		global script_version
+		puts "version $script_version"
         puts "Usage: tclsh ios-stig.tcl {offline | onboard | list | help} config file"
         puts " -- offline               used to scan config file on a unix system with TCL"
         puts " -- online (default)      used to scan from a Cisco IOS device with a tcl parser"
@@ -1545,8 +1543,6 @@ switch $input {
 
 
 
-
-
 puts "STIG SCANNING COMPLETED"
 puts "###################################"
 set time [clock format [clock seconds]]
@@ -1565,5 +1561,4 @@ puts $results "Total FAIL: $total_fail"
 puts $results "\n"
 
 close $results
-#puts "closed file"
 #- - - - - - - End of script - - - - - -#
