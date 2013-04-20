@@ -31,7 +31,6 @@ set script_version "0.5"
 #     Use text files instead of .doc, .rft formats.
 
 proc start_check {} {
-
 ######################################
 	global int_out
 	global results
@@ -42,7 +41,6 @@ proc start_check {} {
     puts "Checking NET1645 SSH timeout 60 seconds Check"
     set check ""
 #    set int_out [exec "show running linenum full"]
- 
    foreach int [regexp -all -line {^\s*(ip ssh time-out 60)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ssh_out]} {
@@ -51,7 +49,6 @@ proc start_check {} {
                 set ssh_out $int
             }
             set check $int
-  #         puts $int
         }
     }
     if {$int >= 1} {
@@ -66,17 +63,13 @@ proc start_check {} {
         puts $results "FIX: ip ssh time-out 60"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET1645 SSH timeout 60 seconds Check"
-   puts "+---------------------+"
-   puts $results "+---------------------+"
-   incr total_test
-    
-    
+   	puts "Finished NET1645 SSH timeout 60 seconds Check"
+	spacer
+   	incr total_test
 ######################################
     puts "Checking NET1646 SSH login attempts greater than 3 Check"
     set check ""
-   foreach int [regexp -all -line {^\s*(ip ssh authentication-retries 3)} $int_out] {
+   	foreach int [regexp -all -line {^\s*(ip ssh authentication-retries 3)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ssh_out]} {
                 append ssh_out "," $int
@@ -98,15 +91,13 @@ proc start_check {} {
         puts $results "FIX: ip ssh authentication-retries 3"
         incr total_fail        
     }
-   puts "Finished NET1646 SSH login attempts greater than 3 Check"
-   puts "+---------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET1646 SSH login attempts greater than 3 Check"
+	spacer
+   	incr total_test
 ######################################
     puts "Checking NET1647 SSH version 2 Check"
     set check ""
-#    set int_out [exec "show running linenum full"]
-   foreach int [regexp -all -line {^\s*(ip ssh version 2)} $int_out] {
+   	foreach int [regexp -all -line {^\s*(ip ssh version 2)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ntp_out]} {
                 append pad_out "," $int
@@ -114,7 +105,6 @@ proc start_check {} {
                 set pad_out $int
             }
             set check $int
-  #         puts $int
         }
     }
     if {$int >= 1} {
@@ -129,18 +119,12 @@ proc start_check {} {
         puts $results "FIX: ip ssh version 2"
         incr total_fail        
     }
-  # puts $ntp_out
-   puts "Finished NET1647 SSH version 2 Check"
-   puts "+---------------------+"
-   puts $results "+---------------------+"
-   incr total_test
-
+   	puts "Finished NET1647 SSH version 2 Check"
+	spacer
+   	incr total_test
 ######################################
-
     puts "Checking NET0724 TCP Keep-Alives Check"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
    foreach int [regexp -all -line {^\s*(no service pad)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ntp_out]} {
@@ -149,7 +133,6 @@ proc start_check {} {
                 set pad_out $int
             }
             set check $int
-  #         puts $int
         }
     }
     if {$int >= 1} {
@@ -164,17 +147,13 @@ proc start_check {} {
         puts $results "FIX: service tcp-keepalives-in"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0724 TCP Keep-Alives Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0724 TCP Keep-Alives Check"
+	spacer
+   	incr total_test
 #######################################
     puts "Checking NET0722 service PAD"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
-   foreach int [regexp -all -line {^\s*(no service pad)} $int_out] {
+   	foreach int [regexp -all -line {^\s*(no service pad)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ntp_out]} {
                 append pad_out "," $int
@@ -182,7 +161,6 @@ proc start_check {} {
                 set pad_out $int
             }
             set check $int
-  #         puts $int
         }
     }
     if {$int >= 1} {
@@ -197,16 +175,12 @@ proc start_check {} {
         puts $results "FIX: no service pad"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0722 service PAD Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0722 service PAD Check"
+	spacer
+   	incr total_test
 #######################################
     puts "Checking NET0340 Login Banner"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
    foreach int [regexp -all -line {^\s*(banner login|banner motd)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ntp_out]} {
@@ -215,7 +189,6 @@ proc start_check {} {
                 set banner_out $int
             }
             set check $int
-  #         puts $int
         }
     }
     if {$int >= 1} {
@@ -229,16 +202,12 @@ proc start_check {} {
         puts $results "Severity: CAT II"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0340 Login Banner Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0340 Login Banner Check"
+	spacer
+   	incr total_test
 ########################################   
     puts "Checking NET0965 TCP Synwait"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
    foreach int [regexp -all -line {^\s*(ip tcp synwait-time 10)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ntp_out]} {
@@ -247,7 +216,6 @@ proc start_check {} {
                 set ntp_out $int
             }
             set check $int
-  #         puts $int
         }
     }
     if {$int >= 1} {
@@ -262,16 +230,12 @@ proc start_check {} {
         puts $results "FIX: ip tcp synwait-time 10"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0965 TCP Synwait Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test   
+   	puts "Finished NET0965 TCP Synwait Check"
+	spacer
+   	incr total_test   
 ######################################
     puts "Checking NET0812 NTP server"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
     foreach int [regexp -all -line {^\s*(ntp peer|ntp server){1,}} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ntp_out]} {
@@ -280,7 +244,6 @@ proc start_check {} {
                 set ntp_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 2} {
@@ -294,16 +257,12 @@ proc start_check {} {
         puts $results "Severity: CAT III"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0812 server/peer Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0812 server/peer Check"
+	spacer
+   	incr total_test
 ######################################
     puts "Checking NET0813 NTP authenticate"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
     foreach int [regexp -all -line {^\s*(ntp authenticate.*){1,}} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ntp_out]} {
@@ -312,7 +271,6 @@ proc start_check {} {
                 set ntp_out $int
             }
             set check $int
-  #         puts $int
         }
     }
     if {[string equal 1 $int]} {
@@ -326,17 +284,12 @@ proc start_check {} {
         puts $results "Severity: CAT III"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0813 NTP authenticate Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0813 NTP authenticate Check"
+	spacer
+   	incr total_test
 #######################################
-
     puts "Checking NET0813 NTP authentication-key"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
     foreach int [regexp -all -line {^\s*(ntp authentication-key.*){1,}} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ntp_out]} {
@@ -345,7 +298,6 @@ proc start_check {} {
                 set ntp_out $int
             }
             set check $int
-  #         puts $int
         }
     }
     if {[string equal 1 $int]} {
@@ -359,26 +311,20 @@ proc start_check {} {
         puts $results "Severity: CAT III"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0813 authentication-key Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0813 authentication-key Check"
+	spacer
+   	incr total_test
 #######################################
     puts "Checking NET0813 NTP trusted-key"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
     foreach int [regexp -all -line {^\s*(ntp trusted-key.*){1,}} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ntp_out]} {
                 append ntp_out "," $int
-   #             puts one
             } else {
                 set ntp_out $int
             }
             set check $int
-  #         puts $int
         }
     }
     if {[string equal 1 $int]} {
@@ -393,14 +339,13 @@ proc start_check {} {
         incr total_fail
     }
   # puts $ntp_out
-   puts "Finished NET0813 NTP Trusted-key Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0813 NTP Trusted-key Check"
+	spacer
+   	incr total_test
 #######################################
     puts "Checking NET0899 NTP loopback address"
     set check ""
-   foreach int [regexp -all -line {^\s*(ntp source Loopback.*){1,}} $int_out] {
+   	foreach int [regexp -all -line {^\s*(ntp source Loopback.*){1,}} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ntp_out]} {
                 append ntp_out "," $int
@@ -421,10 +366,9 @@ proc start_check {} {
         puts $results "Severity: CAT III"
         incr total_fail
     }
-   puts "Finished NET0899 NTP Loopback Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0899 NTP Loopback Check"
+	spacer
+   	incr total_test
 #######################################
 # Deprecated from the STIG
 #    puts "Checking NET0809 NTP access control"
@@ -461,8 +405,6 @@ proc start_check {} {
 #######################################
     puts "Checking NET0730 finger Check"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
    foreach int [regexp -all -line {^\s*(ip finger)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists finger_out]} {
@@ -471,7 +413,6 @@ proc start_check {} {
                 set finger_out $int
             }
             set check $int
-  #         puts $int
         }
     }
     if {$int >= 1} {
@@ -486,16 +427,13 @@ proc start_check {} {
         puts $results "PASS NET0730 finger Check"
         incr total_pass
     }
-   puts "Finished NET0730 finger Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"    
-   incr total_test
+   	puts "Finished NET0730 finger Check"
+	spacer
+   	incr total_test
 ######################################
     puts "Checking NET0600 service password-encryption check"
-    set check ""
-#    set int_out [exec "show running linenum full"]
- 
-   foreach int [regexp -all -line {^\s*(service password-encryption)} $int_out] {
+   	set check "" 
+   	foreach int [regexp -all -line {^\s*(service password-encryption)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ep_out]} {
                 append epp_out "," $int
@@ -503,7 +441,6 @@ proc start_check {} {
                 set ep_out $int
             }
             set check $int
-  #         puts $int
         }
     }
     if {[string equal 1 $int]} {
@@ -518,15 +455,12 @@ proc start_check {} {
         puts $results "service password-encryption"
         incr total_fail
     }
-   puts "Finished NET0600 service password-encryption check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0600 service password-encryption check"
+	spacer
+   	incr total_test
 #######################################
     puts "Checking NET0720 TCP small server services check"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
    foreach int [regexp -all -line {^\s*(service tcp-small-servers)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists tcpsmall_out]} {
@@ -535,7 +469,6 @@ proc start_check {} {
                 set tcpsmall_out $int
             }
             set check $int
-  #         puts $int
         }
     }
     if {[string equal 1 $int]} {
@@ -550,15 +483,12 @@ proc start_check {} {
         puts $results "PASS NET0720 TCP small server services check"
         incr total_pass        
     }
-   puts "Finished NET0720 TCP small server services check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0720 TCP small server services check"
+	spacer
+   	incr total_test
 #######################################
     puts "Checking NET0720 UDP small server services check"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
    foreach int [regexp -all -line {^\s*(service udp-small-servers)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists udpsmall_out]} {
@@ -581,15 +511,12 @@ proc start_check {} {
         puts $results "PASS NET0720 UDP small server services check"
         incr total_pass
     }
-   puts "Finished NET0720 UDP small server services check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0720 UDP small server services check"
+	spacer
+   	incr total_test
 #######################################
     puts "Checking NET0726 Ident check"
-    set check ""
-#    set int_out [exec "show running linenum full"]
- 
+    set check "" 
    foreach int [regexp -all -line {^\s*(ip ident)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists ident_out]} {
@@ -612,15 +539,12 @@ proc start_check {} {
         puts $results "PASS NET0726 Ident check"
         incr total_pass
     }
-   puts "Finished NET0726 Ident check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0726 Ident check"
+	spacer
+   	incr total_test
 #######################################
     puts "Checking NET0770 IP Source Routing"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
     foreach int [regexp -all -line {^\s*(no ip source-route)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists sr_out]} {
@@ -629,7 +553,6 @@ proc start_check {} {
                 set sr_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 1} {
@@ -644,16 +567,12 @@ proc start_check {} {
         puts $results "no ip source-route"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0770 IP Source Routing Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0770 IP Source Routing Check"
+	spacer
+   	incr total_test
 ######################################
     puts "Checking NET0781 Gratuitous ARP"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
     foreach int [regexp -all -line {^\s*(no ip gratuitous-arps)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists sr_out]} {
@@ -662,7 +581,6 @@ proc start_check {} {
                 set sr_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 1} {
@@ -677,16 +595,12 @@ proc start_check {} {
         puts $results "no ip gratuitous-arps"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0781 Gratuitous ARP Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0781 Gratuitous ARP Check"
+	spacer
+   	incr total_test
 ######################################
     puts "Checking NET0949 IP CEF"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
     foreach int [regexp -all -line {^\s*(ip cef)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists cef_out]} {
@@ -695,7 +609,6 @@ proc start_check {} {
                 set cef_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 1} {
@@ -710,16 +623,12 @@ proc start_check {} {
         puts $results "FIX: ip cef"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0949 IP CEF Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0949 IP CEF Check"
+	spacer
+   	incr total_test
 ######################################
    puts "Checking NET-IPV6-033 IPv6 CEF"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
     foreach int [regexp -all -line {^\s*(ipv6 cef)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists cef_out]} {
@@ -728,7 +637,6 @@ proc start_check {} {
                 set cef_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 1} {
@@ -743,11 +651,9 @@ proc start_check {} {
         puts $results "FIX: ipv6 cef"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET-IPV6-033 IPv6 CEF Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET-IPV6-033 IPv6 CEF Check"
+	spacer
+   	incr total_test
 ######################################
    puts "Checking NET0750 bootp server"
     set check ""
@@ -776,16 +682,12 @@ proc start_check {} {
         puts $results "FIX: no ip bootp server"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0750 bootp server Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0750 bootp server Check"
+	spacer
+   	incr total_test
 ######################################
    puts "Checking NET0760 boot network must be disabled"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
     foreach int [regexp -all -line {^\s*(boot network)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists cef_out]} {
@@ -794,7 +696,6 @@ proc start_check {} {
                 set cef_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 1} {
@@ -809,16 +710,12 @@ proc start_check {} {
         puts $results "PASS NET0750 boot network must be disabled Check"
         incr total_pass
     }
-  # puts $ntp_out
-   puts "Finished NET0760 boot network must be disabled Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0760 boot network must be disabled Check"
+	spacer
+   	incr total_test
 ######################################
    puts "Checking NET0760 service config must be disabled"
     set check ""
-#    set int_out [exec "show running linenum full"]
- 
     foreach int [regexp -all -line {^\s*(service config)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists cef_out]} {
@@ -827,7 +724,6 @@ proc start_check {} {
                 set cef_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 1} {
@@ -842,11 +738,9 @@ proc start_check {} {
         puts $results "PASS NET0750 service config must be disabled Check"
         incr total_pass
     }
-  # puts $ntp_out
-   puts "Finished NET0760 service config must be disabled Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0760 service config must be disabled Check"
+	spacer
+   	incr total_test
 ######################################
   puts "Checking NET0820 ip domain-lookup"
     set check ""
@@ -860,7 +754,6 @@ proc start_check {} {
                 set cef_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 1} {
@@ -875,15 +768,12 @@ proc start_check {} {
         puts $results "FIX: no ip domain-lookup"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0820 ip domain-lookup Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0820 ip domain-lookup Check"
+	spacer
+   	incr total_test
 ######################################
   puts "Checking NET0902 FTP use loopback"
     set check ""
-#    set int_out [exec "show running linenum full"]
     foreach int [regexp -all -line {^\s*(ip ftp source-interface Loopback)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists cef_out]} {
@@ -892,7 +782,6 @@ proc start_check {} {
                 set cef_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 1} {
@@ -907,15 +796,12 @@ proc start_check {} {
         puts $results "FIX: ip ftp source-interface Loopback0"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0902 FTP use loopback Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0902 FTP use loopback Check"
+	spacer
+   	incr total_test
 ######################################
   puts "Checking NET0902 TFTP use loopback"
     set check ""
-#    set int_out [exec "show running linenum full"]
     foreach int [regexp -all -line {^\s*(ip tftp source-interface Loopback)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists cef_out]} {
@@ -924,7 +810,6 @@ proc start_check {} {
                 set cef_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 1} {
@@ -939,15 +824,12 @@ proc start_check {} {
         puts $results "FIX: ip tftp source-interface Loopback0"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0902 TFTP use loopback Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0902 TFTP use loopback Check"
+	spacer
+   	incr total_test
 ######################################
   puts "Checking NET0899 NTP use loopback"
     set check ""
-#    set int_out [exec "show running linenum full"]
     foreach int [regexp -all -line {^\s*(ntp source Loopback)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists cef_out]} {
@@ -956,7 +838,6 @@ proc start_check {} {
                 set cef_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 1} {
@@ -971,15 +852,12 @@ proc start_check {} {
         puts $results "FIX: ntp source Loopback0"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0899 NTP use loopback Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0899 NTP use loopback Check"
+	spacer
+   	incr total_test
 ######################################
   puts "Checking NET0740 HTTP server disabled"
     set check ""
-#    set int_out [exec "show running linenum full"]
     foreach int [regexp -all -line {^\s*(no ip http server)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists cef_out]} {
@@ -988,7 +866,6 @@ proc start_check {} {
                 set cef_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 1} {
@@ -1003,11 +880,9 @@ proc start_check {} {
         puts $results "FIX: no ip http server"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0740 HTTP server disabled Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0740 HTTP server disabled Check"
+	spacer
+   	incr total_test
 ######################################
   puts "Checking NET0740 HTTPS server disabled"
     set check ""
@@ -1020,7 +895,6 @@ proc start_check {} {
                 set cef_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 1} {
@@ -1035,15 +909,12 @@ proc start_check {} {
         puts $results "FIX: no ip http secure-server"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0740 HTTPS server disabled Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0740 HTTPS server disabled Check"
+	spacer
+   	incr total_test
 ######################################
   puts "Checking NET0897 authentication (TACACS+) traffic use loopback"
     set check ""
-#    set int_out [exec "show running linenum full"]
     foreach int [regexp -all -line {^\s*(ip tacacs source-interface Loopback)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists cef_out]} {
@@ -1052,7 +923,6 @@ proc start_check {} {
                 set cef_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 1} {
@@ -1067,15 +937,12 @@ proc start_check {} {
         puts $results "FIX: ip tacacs source-interface Loopback"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0897 authentication (TACACS+) traffic use loopback Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+	puts "Finished NET0897 authentication (TACACS+) traffic use loopback Check"
+	spacer
+   	incr total_test
 ######################################
   puts "Checking NET0897 authentication (RADIUS) traffic use loopback"
     set check ""
-#    set int_out [exec "show running linenum full"]
     foreach int [regexp -all -line {^\s*(ip radius source-interface Loopback)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists cef_out]} {
@@ -1084,7 +951,6 @@ proc start_check {} {
                 set cef_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 1} {
@@ -1099,15 +965,12 @@ proc start_check {} {
         puts $results "FIX: ip radius source-interface Loopback"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0897 authentication (RADIUS) traffic use loopback Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0897 authentication (RADIUS) traffic use loopback Check"
+	spacer
+   	incr total_test
 ######################################
   puts "Checking NET0898 Syslog traffic loopback"
     set check ""
-#    set int_out [exec "show running linenum full"]
     foreach int [regexp -all -line {^\s*(logging source-interface Loopback)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists cef_out]} {
@@ -1116,7 +979,6 @@ proc start_check {} {
                 set cef_out $int
             }
             set check $int
-  #        puts $int
         }
     }
     if {$int >= 1} {
@@ -1131,11 +993,9 @@ proc start_check {} {
         puts $results "FIX: logging source-interface Loopback"
         incr total_fail
     }
-  # puts $ntp_out
-   puts "Finished NET0898 Syslog traffic loopback Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0898 Syslog traffic loopback Check"
+	spacer
+   	incr total_test
 ######################################
   puts "Checking NET0900 SNMP traffic loopback address"
     set check ""
@@ -1164,10 +1024,9 @@ proc start_check {} {
         incr total_fail
     }
   # puts $ntp_out
-   puts "Finished NET0900 SNMP traffic loopback address Check"
-   puts "+----------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET0900 SNMP traffic loopback address Check"
+	spacer
+   	incr total_test
 ######################################
   puts "Checking NET0430 Two authentication servers"
     set check ""
@@ -1229,8 +1088,7 @@ proc start_check {} {
     }
   # puts $ntp_out
    puts "Finished NET1021 logging host Check"
-   puts "+---------------------+"
-   puts $results "+---------------------+"
+	spacer
    incr total_test
 ######################################
   puts "Checking NET1070 SCP"
@@ -1262,10 +1120,9 @@ proc start_check {} {
         puts $results "FIX: ip scp server enable"
         incr total_fail
     }
-   puts "Finished NET1070 SCP Check"
-   puts "+------------------------+"
-   puts $results "+---------------------+"
-   incr total_test
+   	puts "Finished NET1070 SCP Check"
+	spacer
+   	incr total_test
 ######################################
   puts "Checking NET-IPV6-025 IPv6 Site Local Unicast Address must not be defined"
     set check ""
@@ -1295,17 +1152,16 @@ proc start_check {} {
         incr total_pass
     }
   # puts $ntp_out
-   puts "Finished NET-IPV6-025 IPv6 Site Local Unicast Address Check"
-   puts "+------------------------+"
-   puts $results "+------------------------+"
-   incr total_test
+   	puts "Finished NET-IPV6-025 IPv6 Site Local Unicast Address Check"
+	spacer
+   	incr total_test
 
 ######################################
     puts "Checking NET-0950 uRPF strict mode not enabled on egress interface"
     set check ""
 #    set int_out [exec "show running linenum full"]
 #   Reference the Network Perimeter Router Checklist 
-    foreach int [regexp -all -line {^\s*(ip verify unicast source reachable-via rx)} $int_out] {
+    	foreach int [regexp -all -line {^\s*(ip verify unicast source reachable-via rx)} $int_out] {
         if {![string equal $check $int]} {
             if {[info exists test1_out]} {
                 append test1_out "," $int
@@ -1327,10 +1183,9 @@ proc start_check {} {
         puts $results "FIX: ipv6 verfiy unicast source reachable-via rx"
         incr total_fail
     }
-   puts "Finished NET-0950 uRPF strict mode not enabled on egress interface Check"
-   puts "+------------------------+"
-   puts $results "+------------------------+"
-   incr total_test     
+   	puts "Finished NET-0950 uRPF strict mode not enabled on egress interface Check"
+	spacer
+   	incr total_test     
 ######################################
     puts "Checking NET-IPV6-034 IPv6 Egress Outbound Spoofing Filter"
     set check ""
@@ -1360,8 +1215,7 @@ proc start_check {} {
         incr total_fail
     }
    puts "Finished NET-IPV6-034 IPv6 Egress Outbound Spoofing Filter Check"
-   puts "+------------------------+"
-   puts $results "+------------------------+"
+	spacer
    incr total_test
 
 #####################################
@@ -1393,8 +1247,7 @@ proc start_check {} {
         incr total_fail
     }
    puts "Finished NET-0400 OSPF authentication Check"
-   puts "+------------------------+"
-   puts $results "+------------------------+"
+	spacer
    incr total_test
 #####################################
     puts "Checking NET-0400 OSPF message-digest"
@@ -1425,17 +1278,22 @@ proc start_check {} {
         incr total_fail
     }
    puts "Finished NET-0400 OSPF message-digest Check"
-   puts "+------------------------+"
-   puts $results "+------------------------+"
+	spacer
    incr total_test   
 #----------- End Script Body ----------#
 
 }
-
-
-puts "Cisco IOS STIG SCAN"
-puts "Version $script_version"
-puts "Copyright (c) 1986-2013 by C3isecurity, Inc.\n"
+proc spacer {} {
+		global results
+	   puts "+------------------------+"
+	   puts $results "+------------------------+"
+}
+proc preamble {} {
+	global script_version
+	puts "Cisco IOS STIG SCAN"
+	puts "Version $script_version"
+	puts "Copyright (c) 1986-2013 by C3isecurity, Inc.\n"
+}
 
 set input [lindex $argv 0]
 set input2 [lindex $argv 1]
@@ -1446,6 +1304,7 @@ set total_fail 0
 
 switch $input {
     "offline" {
+		preamble 
         puts "OFFLINE STIG SCANNING"
         puts "open file"
         set config [open "$input2" r]
@@ -1464,12 +1323,14 @@ switch $input {
 		start_check
     }
     "onboard" {
+		preamble
         puts "onboard STIG SCANNING"
         puts [hostname]
         set results [open "stig.results" w]
         set int_out [exec "show running"]
     }
     "list" {
+		preamble 
         puts "LIST of STIGs checks support in this script"
         puts " - - - - - - - - - - - - - - - - - - - - - "    
         puts "   - NET0812 NTP peer|server check"
@@ -1518,8 +1379,7 @@ switch $input {
         exit    
     }
     "help" {
-		global script_version
-		puts "version $script_version"
+		preamble
         puts "Usage: tclsh ios-stig.tcl {offline | onboard | list | help} config file"
         puts " -- offline               used to scan config file on a unix system with TCL"
         puts " -- online (default)      used to scan from a Cisco IOS device with a tcl parser"
@@ -1533,6 +1393,7 @@ switch $input {
         exit
     }
     default {
+		preamble 
         puts "STIG SCANNING"
         puts [hostname]
         set results [open "$input2.results" w]
@@ -1540,8 +1401,6 @@ switch $input {
         set int_out [exec "show running"]
     }
 }
-
-
 
 puts "STIG SCANNING COMPLETED"
 puts "###################################"
@@ -1559,6 +1418,6 @@ puts $results "Total Checked: $total_test"
 puts $results "Total PASS: $total_pass"
 puts $results "Total FAIL: $total_fail"
 puts $results "\n"
-
+# close results file
 close $results
 #- - - - - - - End of script - - - - - -#
