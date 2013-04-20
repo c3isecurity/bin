@@ -30,108 +30,14 @@
 #     clean of unseen characters.  The parsing could lead to incorrect scans.
 #     Use text files instead of .doc, .rft formats.
 
-
-puts "Cisco IOS STIG SCAN"
-puts "Version 0.4"
-puts "Copyright (c) 1986-2013 by C3isecurity, Inc.\n"
-
-set input [lindex $argv 0]
-set input2 [lindex $argv 1]
-
-switch $input {
-    "offline" {
-        puts "offline STIG SCANNING"
-        #puts "open file"
-        set config [open "$input2" r]
-        puts "Opening Config file $input2"
-        set results [open "$input2.results" w]
-         
-        while { [gets $config line] >= 0 } {
-            set int_out [read $config]
-        }
-        close $config
-    }
-    "onboard" {
-        puts "onboard STIG SCANNING"
-        puts [hostname]
-        set results [open "stig.results" w]
-        set int_out [exec "show running"]
-    }
-    "list" {
-        puts "LIST of STIGs checks support in this script"
-        puts " - - - - - - - - - - - - - - - - - - - - - "    
-        puts "   - NET0812 NTP peer|server check"
-        puts "   - NET0813 NTP authenticate check"
-        puts "   - NET0813 NTP authentication-key check"
-        puts "   - NET0813 NTP trust-key check"
-        puts "   - NET0899 NTP loopback address check"
-        puts "   - NET0809 NTP access control check"
-        puts "   - NET0340 Login Banner check"
-        puts "   - NET0965 TCP Synwait check"
-        puts "   - NET0722 service PAD"
-        puts "   - NET0724 TCP Keep-Alives Check"
-        puts "   - NET1647 SSH version 2 Check"
-        puts "   - NET1646 SSH login attempts greater than 3 Check"
-        puts "   - NET1645 SSH timeout 60 seconds Check"
-        puts "   - NET0600 service password-encryption"
-        puts "   - NET0730 finger Check"
-        puts "   - NET0720 TCP small server services check"
-        puts "   - NET0720 UDP small server services check"
-        puts "   - NET0726 Ident check"
-        puts "   - NET0770 IP Source Routing check"
-        puts "   - NET0781 Gratuitous ARP check"
-        puts "   - NET0949 IP CEF check"
-        puts "   - NET-IPv6-033 NET0953 IPv6 CEF check"
-        puts "   - NET0750 bootp server check"
-        puts "   - NET0760 boot network must be disabled Check"
-        puts "   - NET0760 service config must be disabled Check"
-        puts "   - NET0820 ip domain-lookup check"
-        puts "   - NET0902 FTP use loopback Check"
-        puts "   - NET0902 TFTP use loopback Check"
-        puts "   - NET0899 NTP use loopback Check"
-        puts "   - NET0740 HTTPS server disabled Check"
-        puts "   - NET0740 HTTPS server disabled Check"
-        puts "   - NET0897 authentication (TACACS+) traffic use loopback Check"
-        puts "   - NET0897 authentication (RADIUS) traffic use loopback Check"
-        puts "   - NET0898 Syslog traffic loopback"
-        puts "   - NET0900 SNMP traffic loopback address Check"
-        puts "   - NET0430 Two authentication servers"
-        puts "   - NET1021 logging host"
-        puts "   - NET1070 TFTP used without written approval (use SCP)"
-        puts "   - NET-IPV6-025 IPv6 Site Local Unicast Address must not be defined"
-        puts "   - NET-IPV6-034 IPv6 Egress Outbound Spoofing Filter"
-        puts "   - NET-0950 uRPF strict mode not enabled on egress interface"
-        puts "   - NET-0400 OSPF authentication"
-        puts "   - NET-0400 OSPF message-digest"
-        exit    
-    }
-    "help" {
-        puts "Usage: tclsh ios-stig.tcl {offline | onboard | list | help} config file"
-        puts " -- offline               used to scan config file on a unix system with TCL"
-        puts " -- online (default)      used to scan from a Cisco IOS device with a tcl parser"
-        puts " -- list                  display all the STIG checks"
-        puts " -- help                  list this output\n"
-        puts "Examples:"
-        puts "      router# tclsh ios-stig.tcl"
-        puts "      linux$ tclsh ios-stig.tcl offline config.txt"
-        puts "      linux$ tclsh list"
-        puts "      linux$ help"
-        exit
-    }
-    default {
-        puts "STIG SCANNING"
-        puts [hostname]
-        set results [open "$input2.results" w]
-        puts $results [hostname]
-        set int_out [exec "show running"]
-    }
-}
-
-set total_test 0
-set total_pass 0
-set total_fail 0
+proc start_check {} {
 
 ######################################
+	global int_out
+	global results
+	global total_pass
+	global total_fail
+	global total_test
     puts "+---------------------+"
     puts "Checking NET1645 SSH timeout 60 seconds Check"
     set check ""
@@ -1531,12 +1437,125 @@ set total_fail 0
    incr total_test   
 #----------- End Script Body ----------#
 
-puts "STIG SCANNING FINISHED"
+}
+
+
+puts "Cisco IOS STIG SCAN"
+puts "Version 0.5"
+puts "Copyright (c) 1986-2013 by C3isecurity, Inc.\n"
+
+set input [lindex $argv 0]
+set input2 [lindex $argv 1]
+
+set total_test 0
+set total_pass 0
+set total_fail 0
+
+switch $input {
+    "offline" {
+        puts "OFFLINE STIG SCANNING"
+        puts "open file"
+        set config [open "$input2" r]
+        puts "Opening Config file $input2"
+        set results [open "$input2.results" w]
+         
+        while { [gets $config line] >= 0 } {
+			global int_out
+            set int_out [read $config]
+        }
+        close $config
+		puts "closed file"
+		start_check
+    }
+    "onboard" {
+        puts "onboard STIG SCANNING"
+        puts [hostname]
+        set results [open "stig.results" w]
+        set int_out [exec "show running"]
+    }
+    "list" {
+        puts "LIST of STIGs checks support in this script"
+        puts " - - - - - - - - - - - - - - - - - - - - - "    
+        puts "   - NET0812 NTP peer|server check"
+        puts "   - NET0813 NTP authenticate check"
+        puts "   - NET0813 NTP authentication-key check"
+        puts "   - NET0813 NTP trust-key check"
+        puts "   - NET0899 NTP loopback address check"
+        puts "   - NET0809 NTP access control check"
+        puts "   - NET0340 Login Banner check"
+        puts "   - NET0965 TCP Synwait check"
+        puts "   - NET0722 service PAD"
+        puts "   - NET0724 TCP Keep-Alives Check"
+        puts "   - NET1647 SSH version 2 Check"
+        puts "   - NET1646 SSH login attempts greater than 3 Check"
+        puts "   - NET1645 SSH timeout 60 seconds Check"
+        puts "   - NET0600 service password-encryption"
+        puts "   - NET0730 finger Check"
+        puts "   - NET0720 TCP small server services check"
+        puts "   - NET0720 UDP small server services check"
+        puts "   - NET0726 Ident check"
+        puts "   - NET0770 IP Source Routing check"
+        puts "   - NET0781 Gratuitous ARP check"
+        puts "   - NET0949 IP CEF check"
+        puts "   - NET-IPv6-033 NET0953 IPv6 CEF check"
+        puts "   - NET0750 bootp server check"
+        puts "   - NET0760 boot network must be disabled Check"
+        puts "   - NET0760 service config must be disabled Check"
+        puts "   - NET0820 ip domain-lookup check"
+        puts "   - NET0902 FTP use loopback Check"
+        puts "   - NET0902 TFTP use loopback Check"
+        puts "   - NET0899 NTP use loopback Check"
+        puts "   - NET0740 HTTPS server disabled Check"
+        puts "   - NET0740 HTTPS server disabled Check"
+        puts "   - NET0897 authentication (TACACS+) traffic use loopback Check"
+        puts "   - NET0897 authentication (RADIUS) traffic use loopback Check"
+        puts "   - NET0898 Syslog traffic loopback"
+        puts "   - NET0900 SNMP traffic loopback address Check"
+        puts "   - NET0430 Two authentication servers"
+        puts "   - NET1021 logging host"
+        puts "   - NET1070 TFTP used without written approval (use SCP)"
+        puts "   - NET-IPV6-025 IPv6 Site Local Unicast Address must not be defined"
+        puts "   - NET-IPV6-034 IPv6 Egress Outbound Spoofing Filter"
+        puts "   - NET-0950 uRPF strict mode not enabled on egress interface"
+        puts "   - NET-0400 OSPF authentication"
+        puts "   - NET-0400 OSPF message-digest"
+        exit    
+    }
+    "help" {
+        puts "Usage: tclsh ios-stig.tcl {offline | onboard | list | help} config file"
+        puts " -- offline               used to scan config file on a unix system with TCL"
+        puts " -- online (default)      used to scan from a Cisco IOS device with a tcl parser"
+        puts " -- list                  display all the STIG checks"
+        puts " -- help                  list this output\n"
+        puts "Examples:"
+        puts "      router# tclsh ios-stig.tcl"
+        puts "      linux$ tclsh ios-stig.tcl offline config.txt"
+        puts "      linux$ tclsh list"
+        puts "      linux$ help"
+        exit
+    }
+    default {
+        puts "STIG SCANNING"
+        puts [hostname]
+        set results [open "$input2.results" w]
+        puts $results [hostname]
+        set int_out [exec "show running"]
+    }
+}
+
+
+
+
+
+puts "STIG SCANNING COMPLETED"
+puts "###################################"
 set time [clock format [clock seconds]]
 puts $time
 puts "Total Checked: $total_test"
 puts "Total PASS: $total_pass"
 puts "Total FAIL: $total_fail"
+puts "####################################"
+puts "check $input2.results for results\n"
 
 puts $results "Configuration Hygiene Check"
 puts $results $time

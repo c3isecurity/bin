@@ -122,7 +122,7 @@ Severity: CAT II
 FIX: ip ospf message-digest 10 md5 mypassword
 +------------------------+
 Configuration Hygiene Check
-Sat Apr 13 10:34:58 EDT 2013
+Sat Apr 20 15:51:31 EDT 2013
 Total Checked: 42
 Total PASS: 20
 Total FAIL: 22
