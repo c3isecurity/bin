@@ -1324,10 +1324,11 @@ switch $input {
     }
     "onboard" {
 		preamble
-        puts "onboard STIG SCANNING"
+        puts "ONBOARD STIG SCANNING"
         puts [hostname]
         set results [open "stig.results" w]
         set int_out [exec "show running"]
+		start_check
     }
     "list" {
 		preamble 
@@ -1399,6 +1400,7 @@ switch $input {
         set results [open "$input2.results" w]
         puts $results [hostname]
         set int_out [exec "show running"]
+		start_check
     }
 }
 
