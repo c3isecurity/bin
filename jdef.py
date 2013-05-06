@@ -3,9 +3,9 @@
 print "\n Junos OVAL Content Creator."
 print "Copyright (c) 2012, C3isecurity."
 print "All rights reserved."
-print "version 0.1.5\n"
+print "version 0.1.6\n"
 
-# The program creates content based on the Open Vulnerability Assessment Lanaguage (OVAL) specifications. It is part of
+# The program creates a basic, very simple, OVAL defintion content based on the Open Vulnerability Assessment Lanaguage (OVAL) specifications. It is part of
 # the Security Content Automation Protocol (SCAP).  The program builds a XML defintion file for Juniper Junos.
 
 # import for date and time
