@@ -3,7 +3,7 @@
 print "\n Junos OVAL Content Creator."
 print "Copyright (c) 2012, C3isecurity."
 print "All rights reserved."
-print "version 0.2\n"
+print "version 0.4\n"
 
 # The program creates content based on the Open Vulnerability Assessment Lanaguage (OVAL) specifications. It is part of
 # the Security Content Automation Protocol (SCAP).  The program builds a XML defintion file for Juniper Junos.
@@ -115,6 +115,7 @@ def def_objects ():
 	target.write("</config_object>")
 
 def def_state ():
+	target.write("<states>")
 	config_state_line = "<config_state xmlns=\"http://oval.mitre.org/XMLSchema/oval-definitions-5#netconf\" comment=\"%s\" id=\"oval:com.c3isecurity.dev:ste:%s\" version=\"0\">" % (def_comment, def_id)
 	target.write(config_state_line)
 	# input value 
@@ -123,13 +124,18 @@ def def_state ():
 	state_value_line = "\t\t<value_of datatype=\"string\" operation=\"pattern match\"\">%s</value_of>\n" % state_value
 	target.write(state_value_line)
 	target.write("</config_state>")
+	target.write("</states>")             
 	
+def def_rearmatter():
+	target.write("</oval_definitions>")
+
 # - - - Start writing to file - - -  #
 preamble ()
 definition ()
 def_test ()
 def_objects ()
 def_state ()
+def_rearmatter()
 
 # Close file
 target.close()
