@@ -3,7 +3,7 @@
 print "\n Junos OVAL Content Creator."
 print "Copyright (c) 2012, C3isecurity."
 print "All rights reserved."
-print "version 0.4\n"
+print "version 0.1.5\n"
 
 # The program creates content based on the Open Vulnerability Assessment Lanaguage (OVAL) specifications. It is part of
 # the Security Content Automation Protocol (SCAP).  The program builds a XML defintion file for Juniper Junos.
@@ -19,7 +19,7 @@ now = datetime.datetime.now()
 def_timestamp = now.strftime("%Y-%m-%dT%H:%M:%S")
 def_timestamp_line = "\t\t\t\t<submitted date=\"%s\">\n" % def_timestamp
 oval_timestamp = now.strftime("%Y-%m-%dT%H:%M:%S")
-oval_timestamp_line = " <oval:timestamp>%s</oval:stimestamp>\n" % oval_timestamp
+oval_timestamp_line = " <oval:timestamp>%s</oval:timestamp>\n" % oval_timestamp
 
 #script, filename = argv
 # Write to file name filename.xml
