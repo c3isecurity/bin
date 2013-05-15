@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 print "\n Basic Junos OVAL Content Creator."
-print "Copyright (c) 2012, C3isecurity."
+print "Copyright (c) 2013, C3isecurity."
 print "All rights reserved."
-print "version 0.1.7\n"
+print "version 0.1.8\n"
 
 # The program creates a basic, very simple, OVAL defintion content based on 
 # the Open Vulnerability Assessment Lanaguage (OVAL) specifications. It is 
@@ -66,7 +66,7 @@ def preamble ():
 	  xmlns:netconf-def=\"http://oval.mitre.org/XMLSchema/oval-definitions-5#netconf\"
 	  xsi:schemaLocation=\"http://oval.mitre.org/XMLSchema/oval-definitions-5#netconf netconf-definitions-schema.xsd\">\n""")
 	target.write("""  <generator>    
-	  <oval:product_name>C2</oval:product_name>
+	  <oval:product_name>Juniper Junos OVAL Creator</oval:product_name>
 	  <oval:schema_version>5.10</oval:schema_version>\n """) 
 	target.write(oval_timestamp_line)
 	target.write("  </generator>\n")
@@ -101,7 +101,7 @@ def def_test():
 	target.write("<tests>\n")
 	config_test_line = "\t<config_test xmlns=\"http://oval.mitre.org/XMLSchema/oval-definitions-5#netconf\" check=\"at least one\" check_existence=\"at_least_one_exists\" comment=\"%s\" id=\"oval:com.c3isecurity.dev:tst:%s\" version=\"0\">\n" % (def_comment, def_id)
 	target.write(config_test_line)
-	object_ref_line = "<object object_ref=\"oval:com.c3isecurity.dev:obj:%s\"/>" % def_id
+	object_ref_line = "\t\t<object object_ref=\"oval:com.c3isecurity:obj:%s\"/>" % def_id
 	target.write("\t</config_test>\n")
 	target.write("</tests>\n")
 
@@ -114,19 +114,19 @@ def def_objects ():
 	xpath_location_line = "\t\t<xpath>%s</xpath>\n" % xpath_location
 	          #<xpath>//protocols/ospf/area/interface/authentication/md5/key/text()</xpath>
 	target.write(xpath_location_line)
-	target.write("</config_object>")
+	target.write("</config_object>\n")
 
 def def_state ():
 	target.write("<states>")
-	config_state_line = "<config_state xmlns=\"http://oval.mitre.org/XMLSchema/oval-definitions-5#netconf\" comment=\"%s\" id=\"oval:com.c3isecurity.dev:ste:%s\" version=\"0\">" % (def_comment, def_id)
+	config_state_line = "\t<config_state xmlns=\"http://oval.mitre.org/XMLSchema/oval-definitions-5#netconf\" comment=\"%s\" id=\"oval:com.c3isecurity.dev:ste:%s\" version=\"0\">" % (def_comment, def_id)
 	target.write(config_state_line)
 	# input value 
 	print "\nValue: "
 	state_value = raw_input("> ")
 	state_value_line = "\t\t<value_of datatype=\"string\" operation=\"pattern match\"\">%s</value_of>\n" % state_value
 	target.write(state_value_line)
-	target.write("</config_state>")
-	target.write("</states>")             
+	target.write("\t\t</config_state>\n")
+	target.write("\t</states>\n")             
 	
 def def_rearmatter():
 	target.write("</oval_definitions>")
