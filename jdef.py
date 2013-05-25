@@ -3,7 +3,7 @@
 print "\n Basic Junos OVAL Content Creator."
 print "Copyright (c) 2013, C3isecurity."
 print "All rights reserved."
-print "version 0.2.0\n"
+print "version 0.2.1\n"
 
 # The program creates a basic, very simple, OVAL defintion content based on 
 # the Open Vulnerability Assessment Lanaguage (OVAL) specifications. It is 
@@ -61,7 +61,7 @@ def preamble ():
 	target.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
 	target.write("""<oval_definitions xsi:schemaLocation=\"http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-defintions-schema.xsd 
         http://oval.mitre.org/XMLSchema/oval-definitions-5#netconf netconf-definitions-schema.xsd
-        http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd
+        http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd\"
         xmlns=\"http://oval.mitre.org/XMLSchema/oval-definitions-5\"
 	  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"
 	  xmlns:oval=\"http://oval.mitre.org/XMLSchema/oval-common-5\"
@@ -107,6 +107,7 @@ def def_test():
 	target.write("</tests>\n")
 
 def def_objects ():
+	target.write("<objects>\n")
 	config_object_line = "\t<config_object xmlns=\"http://oval.mitre.org/XMLSchema/oval-definitions-5#netconf\" comment=\"%s\" id=\"oval:org.c3isecurity.oval:obj:%s\" version=\"0\">\n" % (def_comment, def_id)
 	target.write(config_object_line)
 	# input Xpath 
@@ -115,7 +116,8 @@ def def_objects ():
 	xpath_location_line = "\t\t<xpath>%s</xpath>\n" % xpath_location
 	          #<xpath>//protocols/ospf/area/interface/authentication/md5/key/text()</xpath>
 	target.write(xpath_location_line)
-	target.write("</config_object>\n")
+	target.write("\t</config_object>\n")
+	target.write("</objects>\n")
 
 def def_state ():
 	target.write("<states>\n")
@@ -124,7 +126,7 @@ def def_state ():
 	# input value 
 	print "\nValue: "
 	state_value = raw_input("> ")
-	state_value_line = "\t\t<value_of> datatype=\"string\" operation=\"pattern match\"\">%s</value_of>\n" % state_value
+	state_value_line = "\t\t<value_of datatype=\"string\" operation=\"pattern match\">%s</value_of>\n" % state_value
 	target.write(state_value_line)
 	target.write("\t</config_state>\n")
 	target.write("\t</states>\n")             
